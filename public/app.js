@@ -82,8 +82,7 @@ function showResult(imageUrl, promptText) {
     resultImage.alt = "Image failed to load. Try again.";
   };
   resultPrompt.textContent = promptText || "";
-  resultSection.setAttribute("aria-hidden", "false");
-  resultSection.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  resultSection.classList.add("has-result");
 }
 
 async function generate() {
@@ -117,12 +116,43 @@ form.addEventListener("submit", (e) => {
 });
 
 generateAgain.addEventListener("click", () => {
-  resultSection.setAttribute("aria-hidden", "true");
+  resultSection.classList.remove("has-result");
   resultImage.removeAttribute("src");
   resultPrompt.textContent = "";
 });
 
 dismissError.addEventListener("click", hideError);
+
+(function initTheme() {
+  const storageKey = "arttoo-theme";
+  const toggle = document.getElementById("theme-toggle");
+  const root = document.documentElement;
+
+  function getStored() {
+    try {
+      return localStorage.getItem(storageKey);
+    } catch (_) {
+      return null;
+    }
+  }
+
+  function setTheme(theme) {
+    root.setAttribute("data-theme", theme === "dark" ? "dark" : "");
+    try {
+      localStorage.setItem(storageKey, theme === "dark" ? "dark" : "light");
+    } catch (_) {}
+  }
+
+  const stored = getStored();
+  if (stored === "dark") setTheme("dark");
+  else if (stored === "light") setTheme("light");
+  else if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) setTheme("dark");
+
+  toggle.addEventListener("click", () => {
+    const isDark = root.getAttribute("data-theme") === "dark";
+    setTheme(isDark ? "light" : "dark");
+  });
+})();
 
 addPersonalityBtn.addEventListener("click", () => {
   addCustomChip("personality", customPersonalityInput.value, personalityChips);
