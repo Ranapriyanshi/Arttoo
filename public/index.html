@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arttoo — AI Tattoo Designer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="page">
+    <header class="header">
+      <h1 class="logo">Arttoo</h1>
+      <p class="tagline">Your personality. One design.</p>
+    </header>
+
+    <main class="main">
+      <section class="form-section">
+        <form id="tattoo-form" class="form">
+          <fieldset class="fieldset">
+            <legend>Personality</legend>
+            <div class="chips" id="personality-chips" data-name="personality">
+              <label class="chip"><input type="checkbox" name="personality" value="bold" /> Bold</label>
+              <label class="chip"><input type="checkbox" name="personality" value="calm" /> Calm</label>
+              <label class="chip"><input type="checkbox" name="personality" value="creative" /> Creative</label>
+              <label class="chip"><input type="checkbox" name="personality" value="mysterious" /> Mysterious</label>
+              <label class="chip"><input type="checkbox" name="personality" value="free-spirited" /> Free-spirited</label>
+              <label class="chip"><input type="checkbox" name="personality" value="grounded" /> Grounded</label>
+              <label class="chip"><input type="checkbox" name="personality" value="rebellious" /> Rebellious</label>
+              <label class="chip"><input type="checkbox" name="personality" value="spiritual" /> Spiritual</label>
+            </div>
+            <div class="add-custom-row">
+              <input type="text" id="custom-personality-input" class="input add-custom-input" placeholder="Add custom..." maxlength="40" />
+              <button type="button" class="btn btn-small" id="add-personality-btn">Add</button>
+            </div>
+          </fieldset>
+
+          <fieldset class="fieldset">
+            <legend>Lifestyle</legend>
+            <div class="chips" id="lifestyle-chips" data-name="lifestyle">
+              <label class="chip"><input type="checkbox" name="lifestyle" value="nature" /> Nature</label>
+              <label class="chip"><input type="checkbox" name="lifestyle" value="travel" /> Travel</label>
+              <label class="chip"><input type="checkbox" name="lifestyle" value="music" /> Music</label>
+              <label class="chip"><input type="checkbox" name="lifestyle" value="ocean" /> Ocean</label>
+              <label class="chip"><input type="checkbox" name="lifestyle" value="minimalist living" /> Minimalist</label>
+              <label class="chip"><input type="checkbox" name="lifestyle" value="fitness" /> Fitness</label>
+              <label class="chip"><input type="checkbox" name="lifestyle" value="art & culture" /> Art & culture</label>
+              <label class="chip"><input type="checkbox" name="lifestyle" value="family" /> Family</label>
+            </div>
+            <div class="add-custom-row">
+              <input type="text" id="custom-lifestyle-input" class="input add-custom-input" placeholder="Add custom..." maxlength="40" />
+              <button type="button" class="btn btn-small" id="add-lifestyle-btn">Add</button>
+            </div>
+          </fieldset>
+
+          <div class="row">
+            <label class="label">
+              Style
+              <select name="style" class="select">
+                <option value="minimalist">Minimalist</option>
+                <option value="traditional american">Traditional American</option>
+                <option value="geometric">Geometric</option>
+                <option value="watercolor">Watercolor</option>
+                <option value="blackwork">Blackwork</option>
+                <option value="fine line">Fine line</option>
+                <option value="tribal">Tribal</option>
+                <option value="realistic">Realistic</option>
+              </select>
+            </label>
+            <label class="label">
+              Placement
+              <select name="placement" class="select">
+                <option value="arm">Arm</option>
+                <option value="forearm">Forearm</option>
+                <option value="wrist">Wrist</option>
+                <option value="back">Back</option>
+                <option value="chest">Chest</option>
+                <option value="shoulder">Shoulder</option>
+                <option value="leg">Leg</option>
+                <option value="ankle">Ankle</option>
+              </select>
+            </label>
+            <label class="label">
+              Colors
+              <select name="colors" class="select">
+                <option value="black and grey">Black & grey</option>
+                <option value="black only">Black only</option>
+                <option value="subtle color accents">Subtle color</option>
+                <option value="vivid colors">Vivid colors</option>
+              </select>
+            </label>
+          </div>
+
+          <label class="label">
+            Extra notes (optional)
+            <input type="text" name="extra" class="input" placeholder="e.g. small size, no text, floral..." />
+          </label>
+
+          <button type="submit" class="btn" id="submit-btn">Generate my tattoo</button>
+        </form>
+      </section>
+
+      <section class="result-section" id="result-section" aria-hidden="true">
+        <div class="result-inner">
+          <p class="result-label">Your design</p>
+          <div class="image-wrap" id="image-wrap">
+            <img id="result-image" alt="Generated tattoo design" />
+          </div>
+          <p class="result-prompt" id="result-prompt"></p>
+          <button type="button" class="btn btn-ghost" id="generate-again">Generate another</button>
+        </div>
+      </section>
+
+      <div class="state state-loading" id="state-loading" aria-hidden="true">
+        <div class="spinner"></div>
+        <p>Designing your tattoo…</p>
+      </div>
+      <div class="state state-error" id="state-error" aria-hidden="true">
+        <p id="error-message"></p>
+        <button type="button" class="btn btn-ghost" id="dismiss-error">Try again</button>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <p>Powered by AI. For inspiration only — always consult a professional artist.</p>
+    </footer>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
