@@ -145,8 +145,7 @@ dismissError.addEventListener("click", hideError);
 
   const stored = getStored();
   if (stored === "dark") setTheme("dark");
-  else if (stored === "light") setTheme("light");
-  else if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) setTheme("dark");
+  else setTheme("light");
 
   toggle.addEventListener("click", () => {
     const isDark = root.getAttribute("data-theme") === "dark";
